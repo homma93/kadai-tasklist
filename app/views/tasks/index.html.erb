@@ -1,18 +1,24 @@
 <h1>タスク一覧</h1>
 
-<table>
-  <tr>
-    <th>ID</th>
-    <th>タスク</th>
-    <th>ステータス</th>
-  </tr>
-  <% @tasks.each do |task| %>
-  <tr>
-    <td><%= link_to task.id, task %></td>
-    <td><%= task.content %></td>
-    <td><%= task.status %></td>
-  </tr>
-  <% end %>
-</table>
-
+<% if @tasks.count == 0 %>
+  タスクがありません。<br>
+<% else %>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>タスク</th>
+      <th>ステータス</th>
+    </tr>
+    <% @tasks.each do |task| %>
+    <tr>
+      <td><%= link_to task.id, task %></td>
+      <td><%= task.content %></td>
+      <td><%= task.status %></td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
 <%= link_to '新規タスクの追加', new_task_path %>
+<%= link_to 'Logout', logout_path, method: :delete %>
+
+<%= paginate @tasks %>
