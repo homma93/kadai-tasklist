@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
+  before_action :delete_task_confirm, only: [:update, :destroy]
 
   def index
     if logged_in?
@@ -69,5 +70,11 @@ class TasksController < ApplicationController
   def logged_in?
     !!current_user
   end
+  
+  def delete_task_confirm
+    @task = current_user.tasks.find_by(id: params[:id])
+    unless @task
+      redirect_to tasks_url
+    end
+  end
 end
-
