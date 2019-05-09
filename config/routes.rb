@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'sessions#new'
+  root to: 'tasks#index'
 
   get 'sessions/new'
   get 'sessions/create'
